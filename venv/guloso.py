@@ -45,6 +45,8 @@ class Labirinto:
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
 
+        ax.set_title(f'Total coletado: {lab.total_coletado}')
+
         ax.scatter(xi, yi, zi, c='green', marker='o', label='Inicial')
         ax.scatter(xf, yf, zf, c='red', marker='o', label='Final')
 

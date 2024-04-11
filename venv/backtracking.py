@@ -40,8 +40,12 @@ class Labirinto:
 
                 self.ax.scatter(xf, yf, zf, c='green', marker='D')
 
-                for x, y, z in self.visitados:
-                    self.ax.scatter(x, y, z, c='black', marker='.')
+                # for x, y, z in self.visitados:
+                #     self.ax.scatter(x, y, z, c='black', marker='.')
+                for i in range(len(self.visitados) - 1):
+                    x, y, z = self.visitados[i]
+                    axf, ayf, azf = self.visitados[i + 1]
+                    self.ax.plot([x, axf], [y, ayf], [z, azf], c='black')
                 self.ax.scatter(xi, yi, zi, c='red', marker='o')
                 self.ax.set_xlabel('X')
                 self.ax.set_ylabel('Y')
