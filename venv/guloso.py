@@ -5,7 +5,9 @@ import time
 
 class Labirinto:
     def __init__(self):
-        self.labirinto = np.random.randint(-100, 101, size=(10, 10, 10))
+        plt.rcParams['toolbar'] = 'None'
+        self.TAMANHO_MATRIZ = 10
+        self.labirinto = np.random.randint(-100, 101, size=(self.TAMANHO_MATRIZ, self.TAMANHO_MATRIZ, self.TAMANHO_MATRIZ))
         self.visitados = []
         self.total_coletado = 0
         self.max_coletas = 2000
@@ -22,9 +24,9 @@ class Labirinto:
             for dx in [-1, 0, 1]:
                 for dy in [-1, 0, 1]:
                     for dz in [-1, 0, 1]:
-                        if abs(dx) + abs(dy) + abs(dz) == 1:
+                        #if abs(dx) + abs(dy) + abs(dz) == 1:
                             x, y, z = xi + dx, yi + dy, zi + dz
-                            if 0 <= x < 10 and 0 <= y < 10 and 0 <= z < 10 and (x, y, z) not in self.visitados:
+                            if 0 <= x < self.TAMANHO_MATRIZ and 0 <= y < self.TAMANHO_MATRIZ and 0 <= z < self.TAMANHO_MATRIZ and (x, y, z) not in self.visitados:
                                 vizinhos.append((x, y, z))
 
             if not vizinhos:
@@ -66,11 +68,11 @@ class Labirinto:
 if __name__ == '__main__':
     while True:
         lab = Labirinto()
-        xi, yi, zi = np.random.randint(0, 10, size=3)
-        xf, yf, zf = np.random.randint(0, 10, size=3)
+        xi, yi, zi = np.random.randint(0, lab.TAMANHO_MATRIZ, size=3)
+        xf, yf, zf = np.random.randint(0, lab.TAMANHO_MATRIZ, size=3)
         while (xi, yi, zi) == (xf, yf, zf):
-            xi, yi, zi = np.random.randint(0, 10, size=3)
-            xf, yf, zf = np.random.randint(0, 10, size=3)
+            xi, yi, zi = np.random.randint(0, lab.TAMANHO_MATRIZ, size=3)
+            xf, yf, zf = np.random.randint(0, lab.TAMANHO_MATRIZ, size=3)
 
         lab.coletar_guloso(xi, yi, zi, xf, yf, zf)
         print("Valor total coletado:", lab.total_coletado)
